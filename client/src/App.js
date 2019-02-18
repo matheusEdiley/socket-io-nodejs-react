@@ -33,9 +33,7 @@ class App extends Component {
 
   render() {
 
-    // testing for socket connections
     const socket = socketIOClient(this.state.endpoint);
-
     socket.on('msg', (msg) => {
       this.state.mgsReceived = msg;
       this.setState({});
@@ -43,6 +41,7 @@ class App extends Component {
 
     return (
       <div className="App">
+
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Socket.IO</h1>
@@ -53,24 +52,31 @@ class App extends Component {
           <Form id="genericForm" horizontal>
 
             <div>
+
               <FormGroup controlId="formHorizontalEmail">
+                
                 <Col componentClass={ControlLabel} sm={2}>
                   Message
                 </Col>
+
                 <Col sm={10}>
                   <FormControl name="message" onChange={this.handleChange}
                     placeholder="Enter a message" />
                 </Col>
               </FormGroup>
+
               <Button className="App-button" bsStyle="primary" onClick={() => this.send()}> Send <Glyphicon glyph="send" />
               </Button>
+            
             </div>
           </Form>
         </Panel>
         {this.state.mgsReceived.length > 0 ?
           <Panel className="App-form">
+
             <h3> <Glyphicon glyph="comment" /> </h3>
             {<Well bsSize="large" >{this.state.mgsReceived}</Well>}
+
           </Panel>: ""
         }
 
